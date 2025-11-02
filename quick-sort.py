@@ -1,33 +1,30 @@
 import argparse
 
 # Quick Sort Implementation.
-def quick_sort(arr):
-    print("Sorting array using Quick Sort...")
-
-    if len(arr) <= 1:
-        return arr
-
-    pivot = arr[len(arr) - 1]
-    less_than_pivot = []
-    greater_than_pivot = []
-    equal_to_pivot = []
-
+# Returns the index of the pivot element after partitioning
+def partition(arr, low, high):
+    pivot = arr[high]
     print("pivot:", pivot)
+    # Index of smaller element
+    i = low - 1
+    print("initial i:", i)
+    for j in range(low, high):
+        if arr[j] < pivot:
+            i += 1
+            # Swap elements at i and j to move smaller element to the left side
+            arr[i], arr[j] = arr[j], arr[i]
+    # Swap the pivot element with the element at i+1 because i is the index of the smaller element
+    arr[i + 1], arr[high] = arr[high], arr[i + 1]
+    return i + 1
 
-    for element in arr:
-        if element < pivot:
-            less_than_pivot.append(element)
-        elif element > pivot:
-            greater_than_pivot.append(element)
-        else:
-            equal_to_pivot.append(element)
-    # print("Less than pivot:", less_than_pivot)
-    # print("Greater than pivot:", greater_than_pivot)
-    # Recursively sort the less than and greater than pivot lists
-    sorted_less = quick_sort(less_than_pivot) if less_than_pivot else []
-    sorted_greater = quick_sort(greater_than_pivot) if greater_than_pivot else []
-
-    return sorted_less + equal_to_pivot + sorted_greater
+# Recursive function to perform quick sort
+def quick_sort(arr, low, high):
+    # if low index is less than high index then only we need to sort
+    if low < high:
+        # pi is partitioning index, arr[pi] is now at right place
+        pi = partition(arr, low, high)
+        quick_sort(arr, low, pi - 1)
+        quick_sort(arr, pi + 1, high)
 
 if __name__ == "__main__":
     print("Quick Sort Implementation")
@@ -36,5 +33,5 @@ if __name__ == "__main__":
     args = parser.parse_args()
     elements = args.elements
     print("Original array:", elements)
-    sorted_array = quick_sort(elements)
-    print("Sorted array:", sorted_array)
+    quick_sort(elements, 0, len(elements) - 1)
+    print("Sorted array:", elements)
