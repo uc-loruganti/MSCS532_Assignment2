@@ -23,6 +23,8 @@ def quick_sort(arr, low, high):
     if low < high:
         # pi is partitioning index, arr[pi] is now at right place
         pi = partition(arr, low, high)
+        print("pi :", pi)
+        # Recursively sort elements before partition and after partition
         quick_sort(arr, low, pi - 1)
         quick_sort(arr, pi + 1, high)
 
