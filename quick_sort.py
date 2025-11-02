@@ -1,13 +1,14 @@
+
 import argparse
 
 # Quick Sort Implementation.
 # Returns the index of the pivot element after partitioning
 def partition(arr, low, high):
     pivot = arr[high]
-    print("pivot:", pivot)
+    # print("pivot:", pivot)
     # Index of smaller element
     i = low - 1
-    print("initial i:", i)
+    # print("initial i:", i)
     for j in range(low, high):
         if arr[j] < pivot:
             i += 1
@@ -23,7 +24,7 @@ def quick_sort(arr, low, high):
     if low < high:
         # pi is partitioning index, arr[pi] is now at right place
         pi = partition(arr, low, high)
-        print("pi :", pi)
+        # print("pi :", pi)
         # Recursively sort elements before partition and after partition
         quick_sort(arr, low, pi - 1)
         quick_sort(arr, pi + 1, high)
